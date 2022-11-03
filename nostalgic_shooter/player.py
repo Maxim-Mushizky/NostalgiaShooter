@@ -14,7 +14,7 @@ class Player:
         return self.x, self.y
 
     @property
-    def map_post(self):
+    def map_pos(self):
         """ Get tile of the map"""
         return int(self.x), int(self.y)
 
@@ -53,9 +53,9 @@ class Player:
         self.angle %= np.pi * 2  # rotation
 
     def draw(self):
-        pg.draw.line(self.game.screen, 'yellow', (self.x * 100, self.y * 100),
-                     (self.x * 100 * settings.WIDTH * np.cos(self.angle),
-                      (self.y * 100 * settings.WIDTH * np.sin(self.angle))))
+        # pg.draw.line(self.game.screen, 'yellow', (self.x * 100, self.y * 100),
+        #              (self.x * 100 * settings.WIDTH * np.cos(self.angle),
+        #               (self.y * 100 * settings.WIDTH * np.sin(self.angle))))
         pg.draw.circle(self.game.screen, 'green', (self.x * 100, self.y * 100), 15)
 
     def update(self):

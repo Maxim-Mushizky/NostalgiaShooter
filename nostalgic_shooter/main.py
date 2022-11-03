@@ -3,6 +3,7 @@ import sys
 import settings
 from nostalgic_shooter.maps import map
 from nostalgic_shooter.player import Player
+import nostalgic_shooter.raycasting as rc
 
 
 def quit_requested(event):
@@ -22,12 +23,14 @@ class Game:
     def new_game(self):
         self.map = map.Map(self)
         self.player = Player(self)
+        self.raycasting = rc.RayCasting(self)
 
     def update(self):
         """
         Update Screen and display current no' of FPS
         """
         self.player.update()
+        self.raycasting.update()
         pg.display.flip()
         self.delta_time = self.clock.tick(settings.FPS)
         pg.display.set_caption(f'{self.clock.get_fps():.1f}')

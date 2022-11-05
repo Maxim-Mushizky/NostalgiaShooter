@@ -1,7 +1,5 @@
-import pygame as pg
-import numpy as np
+from nostalgic_shooter.maps import _
 
-_ = False
 mini_map = [
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
     [1, _, _, _, _, _, _, _, _, _, _, _, _, _, _, 1],
@@ -36,23 +34,3 @@ mini_map = [
     [3, _, _, _, _, _, _, _, _, _, _, _, _, _, _, 3],
     [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
 ]
-
-
-class Map:
-    def __init__(self, game):
-        self.game = game
-        self.mini_map = mini_map
-        self.world_map = {}
-        self.get_map()
-
-    def get_map(self):
-        """
-        Create mini map dictionary with keys being coordinates of none False values
-        :return:
-        """
-        self.world_map = {(j, i): np.array(self.mini_map)[i, j] for i, j in
-                          zip(*np.where(np.array(self.mini_map) != False))}
-
-    def draw(self):
-        [pg.draw.rect(self.game.screen, 'darkgrey', (pos[0] * 100, pos[1] * 100, 100, 100), 2) for pos in
-         self.world_map]

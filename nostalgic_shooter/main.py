@@ -1,10 +1,11 @@
 import pygame as pg
 import sys
 import settings
-from nostalgic_shooter.maps import map
+from nostalgic_shooter.maps import map_creator, level_one, secret_level
 from nostalgic_shooter.player import Player
 import nostalgic_shooter.game_engine as ge
 from nostalgic_shooter.object_renderer import ObjectRenderer
+from nostalgic_shooter.sprite_objects import CandleBra
 
 
 def quit_requested(event):
@@ -23,10 +24,11 @@ class Game:
         self.new_game()
 
     def new_game(self):
-        self.map = map.Map(self)
+        self.map = map_creator.MapCreator(self, level_one.mini_map)
         self.player = Player(self)
         self.object_renderer = ObjectRenderer(self)
         self.raycasting = ge.RayCasting(self)
+        self.candle_bra = CandleBra(self)
 
     def update(self):
         """
@@ -34,6 +36,7 @@ class Game:
         """
         self.player.update()
         self.raycasting.update()
+        self.candle_bra.update()
         pg.display.flip()
         self.delta_time = self.clock.tick(settings.FPS)
         pg.display.set_caption(f'{self.clock.get_fps():.1f}')
